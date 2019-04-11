@@ -19,12 +19,12 @@
 // V4L2 Capture
 // ---------------------------------
 class V4l2Capture : public V4l2Access
-{		
+{
 	protected:	
 		V4l2Capture(V4l2Device* device);
 	
 	public:
-		static V4l2Capture* create(const V4L2DeviceParameters & param, IoType iotype = V4l2Access::IOTYPE_MMAP);
+		static V4l2Capture* create(const V4L2DeviceParameters & param, V4l2Access::IoType iotype = V4l2Access::IOTYPE_MMAP);
 	
 		size_t read(char* buffer, size_t bufferSize);
 		int    isReadable(timeval* tv);	
