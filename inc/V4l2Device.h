@@ -72,10 +72,6 @@ class V4l2Device
 		int configureFormat(int fd, unsigned int format, unsigned int width, unsigned int height);
 		int configureParam(int fd);
 
-		int setTriggerMode(int fd, LiTriggerMode mode);
-		int softTrigger(int fd);
-		int triggerDelayTime(int fd, unsigned int delay_time_ms);
-
 		virtual bool init(unsigned int mandatoryCapabilities);		
 		virtual size_t writeInternal(char*, size_t) { return -1; };
 		virtual size_t readInternal(char*, size_t)  { return -1; };		
@@ -94,6 +90,10 @@ class V4l2Device
 		unsigned int getHeight()     { return m_height;     }
 		int getFd()         { return m_fd;         }
 		void queryFormat();	
+
+		int setTriggerMode(int fd, LiTriggerMode mode);
+		int softTrigger(int fd);
+		int triggerDelayTime(int fd, unsigned int delay_time_ms);
 
 	protected:
 		V4L2DeviceParameters m_params;

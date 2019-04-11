@@ -14,6 +14,7 @@
 #define V4L2_ACCESS
 
 #include "V4l2Device.h"
+#include "V4l2Capture.h"
 
 class V4l2Access
 {
@@ -38,6 +39,9 @@ class V4l2Access
 		int start()         { return m_device->start();         }
 		int stop()          { return m_device->stop();          }
 
+		int setTriggerMode(LiTriggerMode mode) { return m_device->setTriggerMode(getFd(),mode);}
+		int softTrigger(){ return m_device->softTrigger(getFd());}
+		int triggerDelayTime(unsigned int delay_time_ms){return m_device->triggerDelayTime(getFd() , delay_time_ms);}
 	private:
 		V4l2Access(const V4l2Access&);
 		V4l2Access & operator=(const V4l2Access&);
