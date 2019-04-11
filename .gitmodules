@@ -1,0 +1,3 @@
+[submodule "leopard_tools"]
+	path = leopard_tools
+	url = https://github.com/trickyMan/linux_camera_tool.git

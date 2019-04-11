@@ -20,6 +20,7 @@
 #include "logger.h"
 
 #include "V4l2Device.h"
+#include "uvc_extension_unit_ctrl.h"
 
 // -----------------------------------------
 //    V4L2Device
@@ -103,6 +104,32 @@ int V4l2Device::initdevice(const char *dev_name, unsigned int mandatoryCapabilit
 	
 	return m_fd;
 }
+
+int V4l2Device::setTriggerMode(int fd ,LiTriggerMode mode)
+{
+	switch(mode)
+	{
+		case LI_TRIGGER_INTERNAL:
+			return trigger_enable(fd , 0,0);
+		case LI_TRIGGER_EXTERNAL:
+			return trigger_enable(fd , 1,1);
+		default:
+			LOG(ERROR) << "Not Supported!";
+			return -1;
+	}
+	return -1;
+}
+
+int V4l2Device::softTrigger(int fd)
+{
+	return soft_trigger(fd);
+}
+
+int V4l2Device::triggerDelayTime(int fd, unsigned int delay_time_ms)
+{
+	return trigger_delay_time(fd , delay_time_ms);
+}
+
 
 // check needed V4L2 capabilities
 int V4l2Device::checkCapabilities(int fd, unsigned int mandatoryCapabilities)

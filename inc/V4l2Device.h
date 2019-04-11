@@ -27,6 +27,11 @@
 #define V4L2_PIX_FMT_HEVC  v4l2_fourcc('H', 'E', 'V', 'C')
 #endif
 
+typedef enum{
+	LI_TRIGGER_INTERNAL,
+	LI_TRIGGER_EXTERNAL
+}LiTriggerMode;
+
 // ---------------------------------
 // V4L2 Device parameters
 // ---------------------------------
@@ -66,6 +71,10 @@ class V4l2Device
 		int configureFormat(int fd);
 		int configureFormat(int fd, unsigned int format, unsigned int width, unsigned int height);
 		int configureParam(int fd);
+
+		int setTriggerMode(int fd, LiTriggerMode mode);
+		int softTrigger(int fd);
+		int triggerDelayTime(int fd, unsigned int delay_time_ms);
 
 		virtual bool init(unsigned int mandatoryCapabilities);		
 		virtual size_t writeInternal(char*, size_t) { return -1; };
